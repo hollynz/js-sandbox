@@ -1,0 +1,14 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.heading {
+    font-size: 5em;
+    color: white;
+}
+.title {
+    font-size: 20em;
+    color: white;
+}
