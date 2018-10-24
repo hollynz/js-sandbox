@@ -18,11 +18,18 @@ function validate(){
     if(!emailValidation){
         emailErrorMessage.style.display = "grid";
     }
+    else{
+        emailErrorMessage.style.display = "none";
+    }
     if(!telValidation){
         telErrorMessage.style.display = "grid";
+    }else{
+        telErrorMessage.style.display = "none";
     }
     if(!urlValidation){
         urlErrorMessage.style.display = "grid";
+    }else{
+        urlErrorMessage.style.display = "none";
     }
     return emailValidation && telValidation && urlValidation;
 }
