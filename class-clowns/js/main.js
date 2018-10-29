@@ -1,3 +1,4 @@
+// https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
 // Card array holding all image cards
 var cardArr = document.querySelectorAll('.card');
 
@@ -15,10 +16,6 @@ var clickedCards = [];
 
 
 
-
-
-
-
 function randomise(){
 
 }
@@ -28,7 +25,8 @@ function start(){
 }
 
 function showCard(){
-  
+  this.classList.toggle('visible');
+  this.classList.toggle('matched');
 }
 
 for(var i = 0; i < cardArr.length; i++){
