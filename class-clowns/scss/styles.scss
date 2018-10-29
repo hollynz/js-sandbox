@@ -38,11 +38,35 @@ html {
     justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
+    // Individual cards
     .card {
-      margin: 0.2rem;
+      margin: 1.2%;
       img {
         max-height: 20vw;
       }
     }
+    .card.visible {
+      transform: rotateY(0);
+      background: $white;
+      animation-name: flipCardY;
+      animation-duration: 1s;
+      visibility: visible;
+      backface-visibility: visible;
+    }
+    .card.match {
+      // ADD CODE
+    }
+    .card.unmatched {
+
+    }
+    .card.matched {
+
+    }
   }
+}
+
+// Animations
+
+@keyframes flipCardY {
+
 }

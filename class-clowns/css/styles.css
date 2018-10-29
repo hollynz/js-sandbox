@@ -54,10 +54,27 @@ html .cards {
 }
 
 html .cards .card {
-  margin: 0.2rem;
+  margin: 1.2%;
 }
 
 html .cards .card img {
   max-height: 20vw;
 }
+
+html .cards .card.visible {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+  background: #fff;
+  -webkit-animation-name: flipCardY;
+          animation-name: flipCardY;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  visibility: visible;
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+}
+
+@-webkit-keyframes flipCardY {}
+
+@keyframes flipCardY {}
 /*# sourceMappingURL=styles.css.map */
