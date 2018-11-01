@@ -41,17 +41,12 @@ function randomise (arr) {
   return arr;
 }
 
-// Runs game
-function start () {
-  // Randomised array of cards
-  var randomisedCards = randomise(cardArr);
-  // For each random card in array...
-  randomisedCards.forEach(() => {
-    [].forEach.call(randomisedCards, (item) => {
-      cardsEl.appendChild(item);
-    })
-  });
-}
+// Toggles classes to show/hide card faces
+// Does this need to be a variable rather than straight function???
+function showCard() {
+  this.classList.toggle('flipped');
+  this.classList.toggle('done');
+};
 
 // Add flipped cards to array of checked cards and check whether two cards match.
 function checkCard() {
@@ -66,24 +61,24 @@ function checkCard() {
   }
 }
 
-function startTimer() {
-
-}
-
-// Toggles classes to show/hide card faces
-var showCard = () => {
-  this.classList.toggle('visible');
-  this.classList.toggle('matched');
-};
-
 function matched() {
   flippedCards[0].classList.add('match');
+  flippedCards[0].classList.remove('flipped');
   flippedCards[1].classList.add('match');
-  flippedCards[0].classList.remove()
+  flippedCards[1].classList.remove('flipped');
+  flippedCards = [];
 }
 
 function unmatched() {
-
+  flippedCards[0].classList.add('unmatched');
+  flippedCards[1].classList.add('unmatched');
+  disableCards();
+  setTimeout(function() {
+    flippedCards[0].classList.remove('match, flipped');
+    flippedCards[1].classList.remove('match, flipped');
+    enableCards();
+    flippedCards = [];
+  }, 1000);
 }
 
 // Enable cards and disable cards already matched
@@ -101,8 +96,27 @@ function countMoves() {
 
 }
 
-window.onload = start();
+// Start timing when game starts
+function startTimer() {
+
+}
+
+// Runs game
+function start() {
+  // Randomised array of cards
+  var randomisedCards = randomise(cardArr);
+  // For each random card in array...
+  randomisedCards.forEach(() => {
+    [].forEach.call(randomisedCards, (item) => {
+      cardsEl.appendChild(item);
+    });
+  });
+}
 
 for (var i = 0; i < cardArr.length; i++) {
   cardArr[i].addEventListener('click', showCard);
 }
+
+window.onload = start();
+
+
