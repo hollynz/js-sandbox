@@ -68,7 +68,7 @@ html .cards .card img {
   box-shadow: 0px 0px 4px 1px #fff;
 }
 
-html .cards .card.flipped, html .cards .card.match, html .cards .card.unmatched {
+html .cards .card.flipped, html .cards .card.matched, html .cards .card.unmatched {
   visibility: visible;
   -webkit-backface-visibility: visible;
           backface-visibility: visible;
@@ -84,11 +84,11 @@ html .cards .card.flipped {
           animation-name: flipCardY;
 }
 
-html .cards .card.match {
+html .cards .card.matched {
   cursor: default;
   outline: #51d310;
-  -webkit-animation-name: match;
-          animation-name: match;
+  -webkit-animation-name: matched;
+          animation-name: matched;
 }
 
 html .cards .card.unmatched {
@@ -97,12 +97,12 @@ html .cards .card.unmatched {
           animation-name: unmatched;
 }
 
-html .cards .card.done {
+html .cards .card.disabled {
   cursor: none;
   opacity: 0.8;
 }
 
 @-webkit-keyframes flipCardY {}
 
-@keyframes flipCardY {}@-webkit-keyframes match {}@keyframes match {}@-webkit-keyframes unmatched {}@keyframes unmatched {}
+@keyframes flipCardY {}@-webkit-keyframes matched {}@keyframes matched {}@-webkit-keyframes unmatched {}@keyframes unmatched {}
 /*# sourceMappingURL=styles.css.map */

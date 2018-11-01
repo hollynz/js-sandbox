@@ -57,7 +57,7 @@ html {
         box-shadow: 0px 0px 4px 1px $white;
       }
     }
-    .card.flipped, .card.match, .card.unmatched {
+    .card.flipped, .card.matched, .card.unmatched {
       visibility: visible;
       backface-visibility: visible;
       animation-duration: 1s;
@@ -68,18 +68,19 @@ html {
       // Animations
       animation-name: flipCardY;
     }
-    .card.match {
+    .card.matched {
       cursor: default;
       outline: $light-green;
       // Animations
-      animation-name: match;
+      animation-name: matched;
     }
     .card.unmatched {
       outline: $red;
       // Animations
       animation-name: unmatched;
     }
-    .card.done {
+    // For cards that are visible/already matched
+    .card.disabled {
       cursor: none;
       opacity: 0.8;
     }
@@ -92,7 +93,7 @@ html {
 
 }
 
-@keyframes match {
+@keyframes matched {
 
 }
 

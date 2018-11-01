@@ -14,7 +14,7 @@ var timer = 0, seconds = 0, minutes = 0, hours = 0, moves = 0,
 var flippedCards = [];
 
 // Matched cards
-var matchedCards = document.getElementsByClassName('match');
+var matchedCards = document.getElementsByClassName('matched');
 
 var clickedCards = [];
 
@@ -45,7 +45,7 @@ function randomise (arr) {
 // Does this need to be a variable rather than straight function???
 function showCard() {
   this.classList.toggle('flipped');
-  this.classList.toggle('done');
+  this.classList.toggle('disabled');
 };
 
 // Add flipped cards to array of checked cards and check whether two cards match.
@@ -62,9 +62,9 @@ function checkCard() {
 }
 
 function matched() {
-  flippedCards[0].classList.add('match');
+  flippedCards[0].classList.add('matched');
   flippedCards[0].classList.remove('flipped');
-  flippedCards[1].classList.add('match');
+  flippedCards[1].classList.add('matched');
   flippedCards[1].classList.remove('flipped');
   flippedCards = [];
 }
@@ -74,16 +74,18 @@ function unmatched() {
   flippedCards[1].classList.add('unmatched');
   disableCards();
   setTimeout(function() {
-    flippedCards[0].classList.remove('match, flipped');
-    flippedCards[1].classList.remove('match, flipped');
+    flippedCards[0].classList.remove('matched, flipped');
+    flippedCards[1].classList.remove('matched, flipped');
     enableCards();
     flippedCards = [];
   }, 1000);
 }
 
-// Enable cards and disable cards already matched
+// Enable cards again or disable cards that are a match
 function enableCards() {
+  [].filter.call(cardsEl, () => {
 
+  });
 }
 
 // Temporarily disable cards
