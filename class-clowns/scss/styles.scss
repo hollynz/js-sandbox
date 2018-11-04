@@ -32,6 +32,15 @@ html {
     justify-content: center;
     align-items: center;
   }
+  .timing {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+  }
   // Deck of cards
   .cards {
     background: rgba(0,0,0,0.6);
@@ -57,32 +66,35 @@ html {
         box-shadow: 0px 0px 4px 1px $white;
       }
     }
-    .card.flipped, .card.matched, .card.unmatched {
+    .card.flipped {
       visibility: visible;
       backface-visibility: visible;
       animation-duration: 1s;
-    }
-    .card.flipped {
       transform: rotateY(0);
-      background: $white;
       // Animations
       animation-name: flipCardY;
     }
     .card.matched {
+      visibility: visible;
+      backface-visibility: visible;
+      animation-duration: 1s;
       cursor: default;
       outline: $light-green;
       // Animations
-      animation-name: matched;
+      animation-name: correct;
     }
     .card.unmatched {
+      visibility: visible;
+      backface-visibility: visible;
+      animation-duration: 1s;
       outline: $red;
       // Animations
-      animation-name: unmatched;
+      animation-name: incorrect;
     }
     // For cards that are visible/already matched
     .card.disabled {
       cursor: none;
-      opacity: 0.8;
+      opacity: 0.9;
     }
   }
 }
@@ -90,13 +102,71 @@ html {
 // Animations
 
 @keyframes flipCardY {
+  from {
+		transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+		animation-timing-function: ease-in;
+		opacity: 0;
+	}
 
+	40% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+		animation-timing-function: ease-in;
+	}
+
+	60% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+		opacity: 1;
+	}
+
+	80% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+	}
+
+	to {
+		transform: perspective(400px);
+	}
 }
 
-@keyframes matched {
+@keyframes correct {
+  from {
+		transform: scale3d(1, 1, 1);
+	}
 
+	30% {
+		transform: scale3d(1.25, 0.75, 1);
+	}
+
+	40% {
+		transform: scale3d(0.75, 1.25, 1);
+	}
+
+	50% {
+		transform: scale3d(1.15, 0.85, 1);
+	}
+
+	65% {
+		transform: scale3d(.95, 1.05, 1);
+	}
+
+	75% {
+		transform: scale3d(1.05, .95, 1);
+	}
+
+	to {
+		transform: scale3d(1, 1, 1);
+	}
 }
 
-@keyframes unmatched {
+@keyframes incorrect {
+  from {
+		transform: scale3d(1, 1, 1);
+	}
 
+	50% {
+		transform: scale3d(1.2, 1.2, 1.2);
+	}
+
+	to {
+		transform: scale3d(1, 1, 1);
+	}
 }

@@ -1,36 +1,37 @@
 // Code constructed from https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
 
-// Array holding all image cards
-// var cardArr = [].slice.call(document.getElementsByClassName('card'));
-var cardArr = arrayFromNodeList(document.getElementsByClassName('card'));
+// LIVE HTMLCollection holding all image cards
+let cards = document.getElementsByClassName('card');
+let cardArr = [...cards];
 
-// Unordered list element of all image cards
-var cardsEl = document.querySelector('.cards');
+// Element object of all image cards
+const cardsEl = document.getElementById('cards');
 
 // Scoring variables
-var timer = 0, seconds = 0, minutes = 0, hours = 0, moves = 0, 
+var moves = 0, seconds = 0, minutes = 0, hours = 0,
+    timer = document.querySelector(".timer"), interval,
     counterEl = document.querySelector('.moves');
 
 var flippedCards = [];
 
 // Matched cards
-var matchedCards = document.getElementsByClassName('matched');
+let matchedCards = document.getElementsByClassName('matched');
 
 var clickedCards = [];
 
 // Create array from nodelist HTML element
-function arrayFromNodeList(nodeList) {
-  var arr = [];
-  for(var i = 0; i < nodeList.length; i++) {
-    arr.push(nodeList[i]);
-  }
-  return arr;
-}
+// function arrayFromNodeList(nodeList) {
+//   var arr = [];
+//   for(var i = 0; i < nodeList.length; i++) {
+//     arr.push(nodeList[i]);
+//   }
+//   return arr;
+// };
 
 // Randomises card order
-function randomise (arr) {
+function randomise(arr) {
   var currIndex = arr.length, temp, randomIndex;
-  while(currIndex != 0){
+  while(currIndex !== 0){
     randomIndex = Math.floor(Math.random() * currIndex);
     currIndex--;
     temp = arr[currIndex];
@@ -39,7 +40,7 @@ function randomise (arr) {
     arr[randomIndex] = temp;
   }
   return arr;
-}
+};
 
 // Toggles classes to show/hide card faces
 // Does this need to be a variable rather than straight function???
@@ -51,7 +52,8 @@ function showCard() {
 // Add flipped cards to array of checked cards and check whether two cards match.
 function checkCard() {
   flippedCards.push(this);
-  if(flippedCards.length === 2) {
+  var len = flippedCards.length;
+  if(len === 2) {
     countMoves();
     if(flippedCards[0].type === flippedCards[1].type) {
       matched();
@@ -59,7 +61,7 @@ function checkCard() {
       unmatched();
     }
   }
-}
+};
 
 function matched() {
   flippedCards[0].classList.add('matched');
@@ -67,7 +69,7 @@ function matched() {
   flippedCards[1].classList.add('matched');
   flippedCards[1].classList.remove('flipped');
   flippedCards = [];
-}
+};
 
 function unmatched() {
   flippedCards[0].classList.add('unmatched');
@@ -79,46 +81,76 @@ function unmatched() {
     enableCards();
     flippedCards = [];
   }, 1000);
-}
+};
 
 // Enable cards again or disable cards that are a match
 function enableCards() {
-  [].filter.call(cardsEl, () => {
-
+  [].filter.call(cardArr, (cards) => {
+    cards.classList.remove('disabled');
+    for(var i = 0; i < matchedCards.length; i++) {
+      matchedCards[i].classList.add('disabled');
+    };
   });
-}
+};
 
 // Temporarily disable cards
 function disableCards() {
-
-}
+  [].filter.call(cardArr, (cards) => {
+    cards.classList.add('disabled');
+  });
+};
 
 // Count number of attempts by user
 function countMoves() {
+  moves++;
+  counterEl.innerHTML = moves + 'moves';
+  // Start timer when player makes first move
+  if(moves == 1) {
+    startTimer();
+  }
+};
 
-}
-
-// Start timing when game starts
+// Starts timer when game starts
 function startTimer() {
-
-}
+  interval = setInterval(() => {
+    timer.innerHTML = minutes + ': ' + seconds;
+    seconds++;
+    if(seconds == 60) {
+      minutes++;
+      seconds = 0;
+    };
+    if(minutes = 60) {
+      hours++;
+      minutes = 0;
+    };
+  }, 1000);
+};
 
 // Runs game
 function start() {
-  // Randomised array of cards
-  var randomisedCards = randomise(cardArr);
+  cardArr = randomise(cardArr);
   // For each random card in array...
-  randomisedCards.forEach(() => {
-    [].forEach.call(randomisedCards, (item) => {
+  for(var i = 0; i < cardArr.length; i++) {
+    cardsEl.innerHTML = '';
+    [].forEach.call(cardArr, (item) => {
       cardsEl.appendChild(item);
     });
-  });
-}
+    cardArr[i].classList.remove('flipped', 'matched', 'unmatched', 'disabled');
+  };
+  moves = 0;
+  counterEl.innerHTML = moves + ' moves';
+  seconds = 0; minutes = 0; hours = 0;
+  var timer = document.querySelector('.timer');
+  timer.innerHTML = '00 : 00';
+  clearInterval(interval);
+};
 
 for (var i = 0; i < cardArr.length; i++) {
-  cardArr[i].addEventListener('click', showCard);
-}
+  cards = cardArr[i];
+  cards.addEventListener('click', showCard);
+  cards.addEventListener('click', checkCard);
+};
 
-window.onload = start();
+document.body.onload = start();
 
 
