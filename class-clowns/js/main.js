@@ -8,9 +8,10 @@ let cardArr = [...cards];
 const cardsEl = document.getElementById('cards');
 
 // Scoring variables
-var moves = 0, seconds = 0, minutes = 0, hours = 0,
-    timer = document.querySelector(".timer"), interval,
-    counterEl = document.querySelector('.moves');
+let moves = 0, counterEl = document.querySelector('.moves');
+
+var seconds = 0, minutes = 0, hours = 0,
+    timer = document.querySelector(".timer"), interval;
 
 var flippedCards = [];
 
@@ -18,15 +19,6 @@ var flippedCards = [];
 let matchedCards = document.getElementsByClassName('matched');
 
 var clickedCards = [];
-
-// Create array from nodelist HTML element
-// function arrayFromNodeList(nodeList) {
-//   var arr = [];
-//   for(var i = 0; i < nodeList.length; i++) {
-//     arr.push(nodeList[i]);
-//   }
-//   return arr;
-// };
 
 // Randomises card order
 function randomise(arr) {
@@ -44,7 +36,7 @@ function randomise(arr) {
 
 // Toggles classes to show/hide card faces
 // Does this need to be a variable rather than straight function???
-function showCard() {
+var showCard = function() {
   this.classList.toggle('flipped');
   this.classList.toggle('disabled');
 };
@@ -64,10 +56,10 @@ function checkCard() {
 };
 
 function matched() {
-  flippedCards[0].classList.add('matched');
-  flippedCards[0].classList.remove('flipped');
-  flippedCards[1].classList.add('matched');
-  flippedCards[1].classList.remove('flipped');
+  flippedCards[0].classList.add('matched', 'disabled');
+  flippedCards[1].classList.add('matched', 'disabled');
+  flippedCards[0].classList.remove('flipped', 'no-event');
+  flippedCards[1].classList.remove('flipped', 'no-event');
   flippedCards = [];
 };
 
@@ -76,8 +68,8 @@ function unmatched() {
   flippedCards[1].classList.add('unmatched');
   disableCards();
   setTimeout(function() {
-    flippedCards[0].classList.remove('matched, flipped');
-    flippedCards[1].classList.remove('matched, flipped');
+    flippedCards[0].classList.remove('unmatched', 'flipped', 'no-event');
+    flippedCards[1].classList.remove('unmatched', 'flipped', 'no-event');
     enableCards();
     flippedCards = [];
   }, 1000);

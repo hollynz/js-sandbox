@@ -79,6 +79,7 @@ html .cards {
 }
 
 html .cards .card {
+  cursor: pointer;
   margin: 1.2%;
 }
 
@@ -89,6 +90,7 @@ html .cards .card img {
 }
 
 html .cards .card.flipped {
+  cursor: default;
   visibility: visible;
   -webkit-backface-visibility: visible;
           backface-visibility: visible;
@@ -108,6 +110,7 @@ html .cards .card.matched {
           animation-duration: 1s;
   cursor: default;
   outline: #51d310;
+  background: #E5F720;
   -webkit-animation-name: correct;
           animation-name: correct;
 }
@@ -119,12 +122,13 @@ html .cards .card.unmatched {
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
   outline: #ff0000;
+  background: red;
   -webkit-animation-name: incorrect;
           animation-name: incorrect;
 }
 
 html .cards .card.disabled {
-  cursor: none;
+  pointer-events: none;
   opacity: 0.9;
 }
 

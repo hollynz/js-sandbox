@@ -58,6 +58,7 @@ html {
     align-items: center;
     // Individual cards
     .card {
+      cursor: pointer;
       margin: 1.2%;
       img {
         max-height: 200px;
@@ -67,6 +68,7 @@ html {
       }
     }
     .card.flipped {
+      cursor: default;
       visibility: visible;
       backface-visibility: visible;
       animation-duration: 1s;
@@ -80,6 +82,7 @@ html {
       animation-duration: 1s;
       cursor: default;
       outline: $light-green;
+      background: #E5F720;
       // Animations
       animation-name: correct;
     }
@@ -88,12 +91,13 @@ html {
       backface-visibility: visible;
       animation-duration: 1s;
       outline: $red;
+      background: red;
       // Animations
       animation-name: incorrect;
     }
     // For cards that are visible/already matched
     .card.disabled {
-      cursor: none;
+      pointer-events: none;
       opacity: 0.9;
     }
   }
